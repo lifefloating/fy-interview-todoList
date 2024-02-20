@@ -1,0 +1,18 @@
+version: "1.1"
+services:
+  mongo:
+    container_name: mongo
+    image: mongo:5.0
+    volumes: 
+      - mongodata:/data/db
+    ports:
+      - 27017:27017 
+  app:
+    depends_on:
+      - mongo
+    container_name: todolist-service
+    restart: on-failure
+    build: ./
+    ports:
+      - 3000:3000
+  
